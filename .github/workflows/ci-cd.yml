@@ -56,7 +56,7 @@ jobs:
 
 
       - name: Deploy to Google Cloud Run
-        uses: google-github-actions/deploy-cloudrun@v0
+        uses: google-github-actions/deploy-cloudrun@v2
         with:
           service: api-analyse-de-sentiment
           image: gcr.io/${{ secrets.GCP_PROJECT_ID }}/api-analyse-de-sentiment
