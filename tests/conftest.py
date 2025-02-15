@@ -1,13 +1,12 @@
 import pytest
 from unittest.mock import Mock
 
-@pytest.fixture
-def mock_model():
-    return Mock()
+@pytest.fixture(autouse=True)
+def mock_keras_load_model(monkeypatch):
+    mock_model = Mock()
+    monkeypatch.setattr('tensorflow.keras.models.load_model', lambda *args, **kwargs: mock_model)
 
 @pytest.fixture
-def mock_tf(monkeypatch):
-    mock_tf = Mock()
-    mock_tf.keras.models.load_model.return_value = mock_model()
-    monkeypatch.setattr('app.tf', mock_tf)
-    return mock_tf
+def app():
+    from app import app
+    return app

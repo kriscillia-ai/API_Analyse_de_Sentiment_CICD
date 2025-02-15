@@ -11,10 +11,20 @@ on:
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+        with:
+          lfs: true
+
+      - name: Checkout LFS objects
+        run: git lfs checkout
+
+      - name: Debug - List files
+        run: ls -R
+
+      - name: Check LFS files
+        run: git lfs ls-files
 
       - name: Set up Python
         uses: actions/setup-python@v2
