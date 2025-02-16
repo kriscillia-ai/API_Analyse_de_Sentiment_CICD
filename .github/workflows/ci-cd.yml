@@ -3,7 +3,8 @@ name: CI/CD Pipeline
 env:
   PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
   DOCKER_REGISTRY: gcr.io
-  SERVICE_NAME: api-analyse-de-sentiment
+  SERVICE_NAME: sentiment-analysis-api-v2
+  IMAGE_NAME: sentiment-analysis-api-image-v2
 
 on:
   push:
@@ -62,18 +63,22 @@ jobs:
         with:
           credentials_json: ${{ secrets.GCP_SA_KEY_JSON }}
 
+      - name: Configure Docker
+        run: |
+          gcloud auth configure-docker ${{ env.DOCKER_REGISTRY }}
+
       - name: Build and push Docker image
         uses: docker/build-push-action@v5
         with:
           context: .
           push: true
-          tags: ${{ env.DOCKER_REGISTRY }}/${{ env.PROJECT_ID }}/${{ env.SERVICE_NAME }}:latest
+          tags: ${{ env.DOCKER_REGISTRY }}/${{ env.PROJECT_ID }}/${{ env.IMAGE_NAME }}:latest
 
       - name: Deploy to Google Cloud Run
         uses: google-github-actions/deploy-cloudrun@v2
         with:
           service: ${{ env.SERVICE_NAME }}
-          image: ${{ env.DOCKER_REGISTRY }}/${{ env.PROJECT_ID }}/${{ env.SERVICE_NAME }}:latest
+          image: ${{ env.DOCKER_REGISTRY }}/${{ env.PROJECT_ID }}/${{ env.IMAGE_NAME }}:latest
           region: europe-west2
           allow_unauthenticated: true
           memory: 1Gi
