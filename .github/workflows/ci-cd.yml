@@ -3,8 +3,8 @@ name: CI/CD Pipeline
 env:
   PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
   DOCKER_REGISTRY: gcr.io
-  SERVICE_NAME: sentiment-analysis-api-v2
-  IMAGE_NAME: sentiment-analysis-api-image-v2
+  SERVICE_NAME: sentimentanalysisapiv2
+  IMAGE_NAME: sentimentanalysisapiimagev2
 
 on:
   push:
