@@ -1,5 +1,10 @@
 name: CI/CD Pipeline
 
+env:
+  PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
+  DOCKER_REGISTRY: gcr.io
+  SERVICE_NAME: api-analyse-de-sentiment
+
 on:
   push:
     branches:
@@ -47,7 +52,7 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
@@ -62,13 +67,13 @@ jobs:
         with:
           context: .
           push: true
-          tags: gcr.io/${{ secrets.GCP_PROJECT_ID }}/api-analyse-de-sentiment:latest
+          tags: ${{ env.DOCKER_REGISTRY }}/${{ env.PROJECT_ID }}/${{ env.SERVICE_NAME }}:latest
 
       - name: Deploy to Google Cloud Run
         uses: google-github-actions/deploy-cloudrun@v2
         with:
-          service: api-analyse-de-sentiment
-          image: gcr.io/${{ secrets.GCP_PROJECT_ID }}/api-analyse-de-sentiment:latest
+          service: ${{ env.SERVICE_NAME }}
+          image: ${{ env.DOCKER_REGISTRY }}/${{ env.PROJECT_ID }}/${{ env.SERVICE_NAME }}:latest
           region: europe-west2
           allow_unauthenticated: true
           memory: 1Gi
