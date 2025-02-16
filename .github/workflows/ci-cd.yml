@@ -62,14 +62,13 @@ jobs:
         with:
           context: .
           push: true
-          tags: gcr.io/${{ secrets.GCP_PROJECT_ID }}/api-analyse-de-sentiment
-
+          tags: gcr.io/${{ secrets.GCP_PROJECT_ID }}/api-analyse-de-sentiment:latest
 
       - name: Deploy to Google Cloud Run
         uses: google-github-actions/deploy-cloudrun@v2
         with:
           service: api-analyse-de-sentiment
-          image: gcr.io/${{ secrets.GCP_PROJECT_ID }}/api-analyse-de-sentiment
+          image: gcr.io/${{ secrets.GCP_PROJECT_ID }}/api-analyse-de-sentiment:latest
           region: europe-west2
           allow_unauthenticated: true
           memory: 1Gi
