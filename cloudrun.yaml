@@ -1,0 +1,15 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: sentiment-analysis-api-v2
+spec:
+  template:
+    spec:
+      containers:
+      - image: europe-west2-docker.pkg.dev/analyse-de-sentiment-ci-cd/sentiment-analysis-api-image-v2/app:latest
+        resources:
+          limits:
+            memory: 1Gi
+    metadata:
+      annotations:
+        run.googleapis.com/ingress: "all"
