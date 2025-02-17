@@ -66,12 +66,18 @@ jobs:
         run: |
           gcloud auth configure-docker eu-docker.pkg.dev
 
+      - name: Clean Docker environment
+        run: |
+          docker rmi ${{ env.IMAGE_NAME }}:latest || true
+          docker builder prune -af
+
       - name: Build and push Docker image
         uses: docker/build-push-action@v5
         with:
           context: .
           push: true
           tags: ${{ env.IMAGE_NAME }}:latest
+          no-cache: true
 
       - name: Deploy to Google Cloud Run
         uses: google-github-actions/deploy-cloudrun@v2
