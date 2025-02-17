@@ -70,11 +70,13 @@ jobs:
         run: |
           docker push ${{ env.IMAGE_NAME }}:latest
 
-      - name: Deploy to Google Cloud Run using gcloud
+      - name: Deploy to Google Cloud Run
         run: |
           gcloud run deploy sentiment-analysis-api-v2 \
             --image europe-west2-docker.pkg.dev/analyse-de-sentiment-ci-cd/sentiment-analysis-api-image-v2/app:latest \
             --region europe-west2 \
             --memory=1Gi \
             --platform=managed \
-            --concurrency=100
+            --concurrency=100 \
+            --port=8080 \
+            --startup-timeout=360
