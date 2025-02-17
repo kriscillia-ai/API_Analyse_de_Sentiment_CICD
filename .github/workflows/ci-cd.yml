@@ -70,10 +70,11 @@ jobs:
         run: |
           docker push ${{ env.IMAGE_NAME }}:latest
 
-      - name: Deploy to Google Cloud Run
-        uses: google-github-actions/deploy-cloudrun@v2
-        with:
-          service: ${{ env.SERVICE_NAME }}
-          image: ${{ env.IMAGE_NAME }}:latest
-          region: europe-west2
-          yaml_config_file: cloudrun.yaml
+      - name: Deploy to Google Cloud Run using gcloud
+        run: |
+          gcloud run deploy sentiment-analysis-api-v2 \
+            --image europe-west2-docker.pkg.dev/analyse-de-sentiment-ci-cd/sentiment-analysis-api-image-v2/app:latest \
+            --region europe-west2 \
+            --memory=1Gi \
+            --platform=managed \
+            --concurrency=100

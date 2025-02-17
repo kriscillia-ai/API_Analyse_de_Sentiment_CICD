@@ -63,4 +63,5 @@ def predict():
 
 # Démarrer l'API Flask
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000)
+    port = int(os.environ.get('PORT', 5000))  # Utilise le port 8080 sur Cloud Run, ou 5000 en local
+    app.run(host='0.0.0.0', port=port)
