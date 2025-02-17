@@ -54,9 +54,6 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
-
       - name: Log in to Google Cloud
         uses: google-github-actions/auth@v2
         with:
@@ -66,18 +63,17 @@ jobs:
         run: |
           gcloud auth configure-docker eu-docker.pkg.dev
 
-      - name: Clean Docker environment
+      - name: Build Docker image
         run: |
-          docker rmi ${{ env.IMAGE_NAME }}:latest || true
-          docker builder prune -af
+          docker build -t ${{ env.IMAGE_NAME }}:latest .
 
-      - name: Build and push Docker image
-        uses: docker/build-push-action@v5
-        with:
-          context: .
-          push: true
-          tags: ${{ env.IMAGE_NAME }}:latest
-          no-cache: true
+      - name: Inspect Docker image
+        run: |
+          docker inspect ${{ env.IMAGE_NAME }}:latest
+
+      - name: Push Docker image
+        run: |
+          docker push ${{ env.IMAGE_NAME }}:latest
 
       - name: Deploy to Google Cloud Run
         uses: google-github-actions/deploy-cloudrun@v2
