@@ -3,7 +3,7 @@ name: CI/CD Pipeline
 env:
   PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
   SERVICE_NAME: sentiment-analysis-api-v2
-  IMAGE_NAME: eu-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/sentiment-analysis-api-image-v2
+  IMAGE_NAME: europe-west2-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/sentiment-analysis-api-image-v2/app
 
 on:
   push:
@@ -61,15 +61,11 @@ jobs:
 
       - name: Configure Docker
         run: |
-          gcloud auth configure-docker eu-docker.pkg.dev
+          gcloud auth configure-docker europe-west2-docker.pkg.dev
 
       - name: Build Docker image
         run: |
           docker build -t ${{ env.IMAGE_NAME }}:latest .
-
-      - name: Inspect Docker image
-        run: |
-          docker inspect ${{ env.IMAGE_NAME }}:latest
 
       - name: Push Docker image
         run: |
