@@ -79,4 +79,4 @@ jobs:
             --platform=managed \
             --concurrency=100 \
             --port=8080 \
-            --timeout=600
+            --timeout=800

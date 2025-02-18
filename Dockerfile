@@ -10,4 +10,8 @@ COPY . ./
 RUN pip install --no-cache-dir --upgrade pip
 RUN pip install --no-cache-dir -r requirements.txt
 
-CMD ["gunicorn", "--bind", ":$PORT", "--workers", "1", "--threads", "8", "--timeout", "0", "app:app"]
+EXPOSE 8080
+
+HEALTHCHECK CMD curl --fail http://localhost:${PORT:-8080}/ || exit 1
+
+CMD exec gunicorn --bind :${PORT:-8080} --workers 1 --threads 8 --timeout 0 app:app
