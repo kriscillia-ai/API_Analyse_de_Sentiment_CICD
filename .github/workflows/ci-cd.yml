@@ -75,7 +75,8 @@ jobs:
           gcloud run deploy sentiment-analysis-api-v2 \
             --image europe-west2-docker.pkg.dev/analyse-de-sentiment-ci-cd/sentiment-analysis-api-image-v2/app:latest \
             --region europe-west2 \
-            --memory=1Gi \
+            --memory=2Gi \
+            --cpu=2 \
             --platform=managed \
             --concurrency=100 \
             --port=8080 \
