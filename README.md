@@ -43,19 +43,3 @@ Le projet suit une architecture MLOps, garantissant la reproductibilité, la sca
   * **Interface Utilisateur :** Streamlit
   * **Version Control :** Git, GitHub
 
------
-
-### **Mise en Route :**
-
-Pour exécuter ce projet en local ou le déployer, veuillez consulter les instructions détaillées dans le dossier `docs/` (ou directement dans les notebooks si vous n'avez pas un dossier `docs` dédié).
-
------
-
-### **Structure du Dépôt :**
-
-  * `notebooks/` : Notebooks Jupyter pour l'EDA, la modélisation et l'expérimentation.
-  * `app/` : Code source de l'API Flask et Dockerfile.
-  * `streamlit_app/` : Code source de l'application Streamlit.
-  * `tests/` : Tests unitaires.
-  * `requirements.txt` : Liste des dépendances Python.
-  * `README.md` : Ce fichier.
