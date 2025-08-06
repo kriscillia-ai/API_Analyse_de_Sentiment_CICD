@@ -29,6 +29,21 @@ Le projet suit une architecture MLOps, garantissant la reproductibilité, la sca
 
 -----
 
+### **Démonstration du Projet :**
+
+<img width="540" height="338" alt="image" src="https://github.com/user-attachments/assets/255ddd02-3985-4ad7-838c-d9012c1dd808" />
+<img width="528" height="329" alt="image" src="https://github.com/user-attachments/assets/e2420797-8cf2-49ec-8070-d010d8040c77" />
+<img width="560" height="324" alt="image" src="https://github.com/user-attachments/assets/b0acf813-32fd-4da2-836e-d21626e15109" />
+<img width="564" height="325" alt="image" src="https://github.com/user-attachments/assets/758f811a-1bea-49de-baa1-066328fc73cd" />
+<img width="612" height="321" alt="image" src="https://github.com/user-attachments/assets/13a800ec-cd31-4ef9-a788-3bbd54ea4d65" />
+<img width="143" height="310" alt="image" src="https://github.com/user-attachments/assets/f79ee27b-7647-4422-8c1d-8df5af5bcecb" />
+<img width="612" height="351" alt="image" src="https://github.com/user-attachments/assets/8a053d9f-68ce-4056-9e30-c3e7dbf83b40" />
+
+
+
+
+-----
+
 ### **Technologies Utilisées :**
 
   * **Langages :** Python
